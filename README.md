@@ -1,66 +1,50 @@
-# LuxQuanta AI Strategy — static site
+# LuxQuanta AI Strategy — static site (Next.js + password gate)
 
-Single-page HTML decks for Vercel (static hosting, no build step).
+The decks live in `public/`. A small **Next.js** shell adds **Edge Middleware** and **`/api/unlock`** so you can protect the site with a password stored only in Vercel environment variables.
 
 | URL | Content |
 |-----|---------|
-| `/` | English deck (`index.html`) |
+| `/` | English deck (rewritten to `/index.html` when allowed) |
+| `/index.html` | English deck |
 | `/it.html` | Italian deck |
+| `/login.html` | Password form (always public) |
+
+## Password wall
+
+1. In the Vercel project: **Settings → Environment Variables** add:
+   - **`DECK_PASSWORD`** — the passphrase people use on `/login.html` (Production + Preview as needed).
+   - Optional **`DECK_AUTH_SECRET`** — long random string used to sign the session cookie (defaults to `DECK_PASSWORD` if omitted).
+
+2. Redeploy after adding variables.
+
+**If `DECK_PASSWORD` is not set**, the site stays **fully public** (no login) — useful for local dev and optional open deploys.
+
+The session cookie is **HttpOnly** and holds an **HMAC** derived from `DECK_AUTH_SECRET` (or the password); the plain password is never stored in the cookie.
+
+## Local development
+
+```bash
+npm install
+# optional: echo 'DECK_PASSWORD=test' > .env.local
+npm run dev
+```
+
+Open `http://localhost:3000` — with `DECK_PASSWORD` set you should be redirected to `/login.html`.
+
+## Deploy on Vercel
+
+1. Repository: **[github.com/nicolalazzari/luxquanta](https://github.com/nicolalazzari/luxquanta)**.
+2. Import the repo; Vercel should detect **Next.js** (framework preset **Next.js**, build `next build`, output managed by Next).
+3. Add **`DECK_PASSWORD`** in environment variables, then redeploy.
 
 ## Use your personal account (not MVF)
 
-Deploy and own this project under **Nicola’s** accounts — **not** the MVF / agency Vercel team or org.
-
-### GitHub
-
-- Log in at [github.com](https://github.com) as the profile tied to **`nicolalazzari@gmail.com`** (or whichever GitHub user is personal).
-- Create the empty repo under **your user** (or a personal org), not under the MVF GitHub org.
-
-### Vercel
-
-1. Log out of Vercel if you’re in the wrong session, then log in with **`nicolalazzari@gmail.com`** (e.g. **Continue with Google** using that address).
-2. In the Vercel dashboard, check the **team switcher** (top left): select **Hobby** / your **personal** team — **not** “MVF” or any client team.
-3. **Add New Project** → import the GitHub repo. The project is created in whichever team is currently selected; it must be the personal team before you click Import.
-
-If GitHub was only connected to the MVF Vercel team, open **Vercel → Settings → Git** (under your personal account) and ensure your GitHub user is linked there too.
-
-### Git commits in this folder (local repo)
-
-This repository is configured so commits use:
-
-- **Email:** `nicolalazzari@gmail.com`
-
-(Only affects this repo, not your global Git config.)
-
-## Deploy on Vercel (new GitHub repository)
-
-1. Repository on GitHub: **[github.com/nicolalazzari/luxquanta](https://github.com/nicolalazzari/luxquanta)** (`https://github.com/nicolalazzari/luxquanta.git`).
-2. From this folder (if you clone elsewhere):
-
-   ```bash
-   cd luxquanta-ai-strategy-vercel
-   git remote add origin https://github.com/nicolalazzari/luxquanta.git
-   git push -u origin main
-   ```
-
-3. In [Vercel](https://vercel.com), with **personal team** selected: **Add New Project** → Import the GitHub repo.
-4. Leave defaults: **Framework Preset** “Other”, **Root Directory** `.`, **Build Command** empty, **Output Directory** empty (Vercel serves static files from the repo root).
-
-Preview deployments run on every push; production follows your main branch (or as configured in Vercel).
-
-## Optional: Vercel CLI
-
-```bash
-npm i -g vercel
-cd luxquanta-ai-strategy-vercel
-vercel login   # complete login as nicolalazzari@gmail.com if prompted
-vercel         # when asked, scope/link to your personal Hobby team, not MVF
-```
+Deploy under **`nicolalazzari@gmail.com`** / your **Hobby** team — not the MVF Vercel team. See earlier sections in this file for Git / Vercel login notes.
 
 ## Updating the decks
 
-Replace `index.html` and/or `it.html` with new exports from your main LuxQuanta project, then commit and push.
+Replace `public/index.html` and/or `public/it.html`, commit, and push.
 
 ## Privacy
 
-These pages are **public** unless you enable [Deployment Protection](https://vercel.com/docs/security/deployment-protection) on the Vercel project (recommended if the deck is confidential).
+Even with this gate, anyone with the password can share access. For stricter control, use [Vercel Deployment Protection](https://vercel.com/docs/security/deployment-protection) in addition.

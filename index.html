@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuxQuanta AI Strategy — Nicola Lazzari & Ian Hitge</title>
+<title>LuxQuanta AI Strategy — Ian Hitge & Nicola Lazzari</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -517,6 +517,97 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
   background: var(--accent);
 }
 
+/* private execution + verified publishing scheme */
+.arch-scheme {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 18px;
+  max-width: 760px;
+}
+.arch-layer {
+  border-radius: 12px;
+  padding: 18px 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.arch-layer--pipeline {
+  background: linear-gradient(165deg, var(--bg-surface) 0%, rgba(var(--brand-accent-rgb), 0.07) 100%);
+  border-color: rgba(var(--brand-accent-rgb), 0.22);
+}
+.arch-layer--plane {
+  background: linear-gradient(165deg, rgba(var(--brand-primary-rgb), 0.1) 0%, var(--bg-surface) 100%);
+  border-color: rgba(var(--brand-primary-rgb), 0.22);
+}
+.arch-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.arch-bridge-line {
+  width: 2px;
+  height: 14px;
+  background: linear-gradient(180deg, rgba(var(--brand-accent-rgb), 0.5), rgba(var(--brand-primary-rgb), 0.5));
+  border-radius: 2px;
+}
+.arch-layer-title {
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+.arch-layer-title.green { color: var(--brand-accent); }
+.arch-layer-title.blue { color: var(--accent); }
+.arch-layer-desc {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  line-height: 1.52;
+  margin-bottom: 14px;
+}
+.arch-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 4px;
+  font-size: 0.72rem;
+}
+.arch-step {
+  padding: 5px 11px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+.arch-arrow {
+  color: var(--accent);
+  font-weight: 700;
+  padding: 0 2px;
+  user-select: none;
+}
+.arch-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.arch-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: rgba(var(--brand-primary-rgb), 0.08);
+  color: var(--text-secondary);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
 @media (max-width: 900px) {
   .slide { padding: 40px 32px 80px; }
   h1 { font-size: 2rem; }
@@ -526,12 +617,13 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
   .two-col { grid-template-columns: 1fr; }
   .data-table { font-size: 0.78rem; }
   .stat-row { flex-wrap: wrap; }
+  .arch-flow { justify-content: flex-start; }
 }
 </style>
 </head>
 <body>
 
-<div class="progress-bar"><div class="progress-fill" id="progress" style="width:9.09%"></div></div>
+<div class="progress-bar"><div class="progress-fill" id="progress" style="width:8.33%"></div></div>
 
 <div class="deck" id="deck">
 
@@ -543,7 +635,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     <h1>Building <span class="accent">LuxQuanta's</span> AI Foundation</h1>
     <p class="subtitle">A practical roadmap to unify your AI tools, secure your knowledge, and govern AI usage across every team — without slowing you down.</p>
     <div class="divider" style="margin:0 auto 20px;"></div>
-    <p class="authors">Nicola Lazzari &amp; Ian Hitge<br><span style="color:var(--text-muted); font-size:0.85rem;">Independent AI Strategy Consultants</span></p>
+    <p class="authors">Ian Hitge &amp; Nicola Lazzari<br><span style="color:var(--text-muted); font-size:0.85rem;">Independent AI Strategy Consultants</span></p>
   </div>
 
   <!-- ==================== SLIDE 1: WE UNDERSTAND THE PROBLEM ==================== -->
@@ -566,7 +658,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
       <div class="card">
         <div class="card-icon green">⚠️</div>
         <h3>Security exposure</h3>
-        <p>Sensitive Intellectual Property, quantum Research &amp; Development findings, and client data being fed into third-party AI models with no data processing agreements in place.</p>
+        <p>Sensitive IP, quantum R&amp;D findings, and client data being fed into third-party AI models with no data processing agreements in place.</p>
       </div>
       <div class="card">
         <div class="card-icon green">🚫</div>
@@ -575,7 +667,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
       </div>
     </div>
     <div class="callout warning" style="margin-top:20px;">
-      <strong>The risk is not theoretical.</strong> A single engineer pasting proprietary CV-QKD specs into a public AI model could constitute a material Intellectual Property breach under your investor agreements and European Union data protection law.
+      <strong>The risk is not theoretical.</strong> A single engineer pasting proprietary CV-QKD specs into a public AI model can create serious IP and compliance exposure under your investor agreements and EU data protection law.
     </div>
   </div>
 
@@ -623,14 +715,14 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
       </thead>
       <tbody>
         <tr>
-          <td class="accent-cell">Engineering &amp; Research &amp; Development</td>
+          <td class="accent-cell">Engineering &amp; R&amp;D</td>
           <td>Code review, test generation, documentation, literature search, hardware spec summarization</td>
-          <td>GitHub Copilot (self-hosted or enterprise tier), private LLM instance for Research &amp; Development docs</td>
+          <td>GitHub Copilot Enterprise (or equivalent) with contractual no-training terms; private LLM / air-gapped stack for highest-sensitivity R&amp;D docs where required</td>
           <td><span class="risk-badge high">High</span></td>
         </tr>
         <tr>
-          <td class="accent-cell">Sales &amp; Business Development</td>
-          <td>Proposal drafting, meeting summaries, competitive research, Customer Relationship Management enrichment, email personalization</td>
+          <td class="accent-cell">Sales &amp; BD</td>
+          <td>Proposal drafting, meeting summaries, competitive research, CRM enrichment, email personalization</td>
           <td>ChatGPT Team / Claude for Business, Fathom or Otter for calls</td>
           <td><span class="risk-badge med">Medium</span></td>
         </tr>
@@ -642,14 +734,14 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
         </tr>
         <tr>
           <td class="accent-cell">Operations &amp; Finance</td>
-          <td>Contract review, Standard Operating Procedure drafting, supplier research, financial narrative generation</td>
+          <td>Contract review, SOP drafting, supplier research, financial narrative generation</td>
           <td>NotebookLM for internal docs, ChatGPT Team for drafting</td>
           <td><span class="risk-badge low">Low</span></td>
         </tr>
       </tbody>
     </table>
     <div class="callout" style="margin-top:18px;">
-      <strong>Key principle:</strong> Engineering and Research &amp; Development work with proprietary quantum Intellectual Property — they require air-gapped or enterprise-tier tools with explicit zero-retention data agreements. Sales and management can use standard Business tiers with clear input rules.
+      <strong>Key principle:</strong> Engineering and R&amp;D work with proprietary quantum IP — they require air-gapped or enterprise-tier tools with explicit zero-retention data agreements. Sales and management can use standard Business tiers with clear input rules.
     </div>
   </div>
 
@@ -672,7 +764,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
         <h3 style="color:var(--brand-accent); margin-bottom:14px;">What It Enables</h3>
         <ul class="bullet-list">
           <li>A new sales hire can ask <em>"What were the objections from the last 3 telecom prospects?"</em> and get a sourced answer in seconds</li>
-          <li>An engineer can query <em>"What does our documentation say about Dense Wavelength Division Multiplexing (DWDM) coexistence?"</em> without emailing anyone</li>
+          <li>An engineer can query <em>"What does our documentation say about DWDM coexistence?"</em> without emailing anyone</li>
           <li>Management can ask <em>"Summarize all open risks flagged in Q1 project reviews"</em> across all departments at once</li>
           <li>Knowledge stays inside your infrastructure — nothing leaves to a third-party AI</li>
         </ul>
@@ -683,8 +775,50 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     </div>
   </div>
 
-  <!-- ==================== SLIDE 5: GOVERNANCE & SECURITY ==================== -->
+  <!-- ==================== SLIDE 5: PRIVATE EXECUTION + VERIFIED PUBLISHING ==================== -->
   <div class="slide" data-slide="5">
+    <div class="bg-glow tl"></div>
+    <div class="section-badge"><span class="dot"></span> Optional high-trust layer</div>
+    <h2>Private execution + verified publishing — same idea, two layers.</h2>
+    <p class="subtitle">For workloads where a chat window is not enough: regulated narratives, technical marketing, and anything that must survive procurement scrutiny. Generic pattern — not tied to a single vendor product name.</p>
+    <div class="arch-scheme">
+      <div class="arch-layer arch-layer--pipeline">
+        <div class="arch-layer-title green">Verified publishing pipeline</div>
+        <p class="arch-layer-desc">Structured workflow with mandatory stages: every factual claim is checked against approved sources before and after drafting; editorial, SEO, and safety gates must pass; nothing ships on an unresolved flag. Full audit trail from brief to live asset.</p>
+        <div class="arch-flow" aria-label="Publishing pipeline stages">
+          <span class="arch-step">Brief &amp; scope</span>
+          <span class="arch-arrow">→</span>
+          <span class="arch-step">Source-backed research</span>
+          <span class="arch-arrow">→</span>
+          <span class="arch-step">Draft</span>
+          <span class="arch-arrow">→</span>
+          <span class="arch-step">Multi-gate review</span>
+          <span class="arch-arrow">→</span>
+          <span class="arch-step">Publish + log</span>
+        </div>
+      </div>
+      <div class="arch-bridge">
+        <div class="arch-bridge-line" aria-hidden="true"></div>
+        <span>runs on</span>
+        <div class="arch-bridge-line" aria-hidden="true"></div>
+      </div>
+      <div class="arch-layer arch-layer--plane">
+        <div class="arch-layer-title blue">Private AI execution plane</div>
+        <p class="arch-layer-desc">AI agents and jobs run in an environment <strong>you</strong> operate — your network boundary, your retention rules. Connectors reach only the systems you approve (repos, ticket trackers, docs, CRM, browsers for testing). Policy and logging apply at the platform level, not in each employee’s personal tool stack.</p>
+        <div class="arch-tags">
+          <span class="arch-tag">On-prem or private cloud</span>
+          <span class="arch-tag">Tool &amp; API orchestration</span>
+          <span class="arch-tag">Central visibility</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:18px;">
+      <strong>How this fits the 30-day plan:</strong> The foundation is still stack + knowledge + governance. This layer is the natural next step when you want <strong>high-impact</strong> customer-facing or board-facing output without sending proprietary physics or deal data through consumer AI tabs.
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE 6: GOVERNANCE & SECURITY ==================== -->
+  <div class="slide" data-slide="6">
     <div class="bg-glow tl"></div>
     <div class="section-badge"><span class="dot"></span> Workstream 3 — Governance &amp; Security</div>
     <h2>Clear rules. Enforced by design, not just policy.</h2>
@@ -693,9 +827,9 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
       <div>
         <h3 style="color:var(--accent); margin-bottom:12px;">The AI Policy covers:</h3>
         <ul class="bullet-list">
-          <li><strong>Data classification</strong> — what is public, internal, confidential, and strictly restricted (quantum Intellectual Property, customer data)</li>
+          <li><strong>Data classification</strong> — what is public, internal, confidential, and strictly restricted (quantum IP, customer data)</li>
           <li><strong>Permitted tools per classification</strong> — which AI tools can receive which type of data</li>
-          <li><strong>Zero-retention requirements</strong> — mandatory for any tool handling Research &amp; Development or customer data</li>
+          <li><strong>Zero-retention requirements</strong> — mandatory for any tool handling R&amp;D or customer data</li>
           <li><strong>Incident protocol</strong> — what to do if sensitive data is accidentally shared with an AI</li>
           <li><strong>Approval workflow</strong> — how a new AI tool gets evaluated and added to the approved stack</li>
         </ul>
@@ -706,20 +840,20 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
           <li>Approved tools are <strong>centrally provisioned</strong> — team members access them through a shared workspace, not personal accounts</li>
           <li><strong>No personal billing</strong> — shadow AI spend eliminated immediately on day one</li>
           <li>Usage is <strong>logged at the account level</strong> — you have visibility without surveilling individuals</li>
-          <li>New tools go through a <strong>30-minute security review</strong> before anyone uses them</li>
+          <li>New tools go through a <strong>first-pass security triage</strong> before adoption — quick screening for data handling and contract fit, not full vendor due diligence</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- ==================== SLIDE 6: SECURITY DEEP DIVE ==================== -->
-  <div class="slide" data-slide="6">
+  <!-- ==================== SLIDE 7: SECURITY DEEP DIVE ==================== -->
+  <div class="slide" data-slide="7">
     <div class="bg-glow tl"></div>
     <div class="section-badge"><span class="dot"></span> Security — Risk Assessment</div>
     <h2>Your risk profile is higher than most companies. Here's why it matters.</h2>
-    <p class="subtitle" style="margin-bottom:16px;">LuxQuanta is a quantum cybersecurity company. Your Intellectual Property is your moat. Every AI interaction is a potential data exposure event.</p>
+    <p class="subtitle" style="margin-bottom:16px;">LuxQuanta is a quantum cybersecurity company. Your IP is your moat. Every AI interaction is a potential data exposure event.</p>
     <div class="risk-row">
-      <div class="risk-label"><strong>Research &amp; Development and quantum Intellectual Property shared with public AI models</strong><br>CV-QKD specs, photonic chip designs, algorithm parameters</div>
+      <div class="risk-label"><strong>R&amp;D and quantum IP shared with public AI models</strong><br>CV-QKD specs, photonic chip designs, algorithm parameters</div>
       <span class="risk-badge high">Critical</span>
     </div>
     <div class="risk-row">
@@ -743,8 +877,8 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     </div>
   </div>
 
-  <!-- ==================== SLIDE 7: 30-DAY PLAN ==================== -->
-  <div class="slide" data-slide="7">
+  <!-- ==================== SLIDE 8: 30-DAY PLAN ==================== -->
+  <div class="slide" data-slide="8">
     <div class="bg-glow tl"></div>
     <div class="section-badge"><span class="dot"></span> Execution Plan</div>
     <h2>Fully operational in 30 days.</h2>
@@ -755,7 +889,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
         <div class="tl-content">
           <div class="tl-week">Week 1 — Audit &amp; Stop the Bleeding</div>
           <div class="tl-title">Internal tool audit + immediate risk mitigation</div>
-          <div class="tl-desc">2-hour structured interviews across engineering, sales, management. Map every tool in use. Cancel personal accounts. Provision approved enterprise/team tiers centrally. Critical Intellectual Property exposure risk eliminated immediately.</div>
+          <div class="tl-desc">2-hour structured interviews across engineering, sales, management. Map every tool in use. Cancel personal accounts. Provision approved enterprise/team tiers centrally. Critical IP exposure risk eliminated immediately.</div>
         </div>
       </div>
       <div class="tl-item">
@@ -793,8 +927,8 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     </div>
   </div>
 
-  <!-- ==================== SLIDE 8: DELIVERABLES ==================== -->
-  <div class="slide" data-slide="8">
+  <!-- ==================== SLIDE 9: DELIVERABLES ==================== -->
+  <div class="slide" data-slide="9">
     <div class="bg-glow tl"></div>
     <div class="section-badge"><span class="dot"></span> What You Get</div>
     <h2>Concrete deliverables. Everything owned by LuxQuanta.</h2>
@@ -832,8 +966,8 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     </div>
   </div>
 
-  <!-- ==================== SLIDE 9: WHY US ==================== -->
-  <div class="slide" data-slide="9">
+  <!-- ==================== SLIDE 10: WHY US ==================== -->
+  <div class="slide" data-slide="10">
     <div class="bg-glow tl"></div>
     <div class="section-badge"><span class="dot"></span> Why Us</div>
     <h2>We've done this. For companies where getting it wrong is not an option.</h2>
@@ -862,12 +996,12 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
     </div>
   </div>
 
-  <!-- ==================== SLIDE 10: NEXT STEPS ==================== -->
-  <div class="slide" data-slide="10" style="justify-content:center; align-items:center; text-align:center;">
+  <!-- ==================== SLIDE 11: NEXT STEPS ==================== -->
+  <div class="slide" data-slide="11" style="justify-content:center; align-items:center; text-align:center;">
     <div class="bg-glow tl"></div>
     <div class="bg-glow br"></div>
     <div class="section-badge" style="justify-content:center;"><span class="dot"></span> Next Steps</div>
-    <h2 style="font-size:2rem; margin-bottom:12px;">First week.</h2>
+    <h2 style="font-size:2rem; margin-bottom:12px;">This week.</h2>
     <p class="subtitle" style="margin:0 auto 32px; max-width:560px;">The fastest path from today's fragmented situation to a secure, efficient AI foundation — without disrupting what's already working.</p>
     <div class="card-grid cols-3" style="max-width:740px; margin:0 auto;">
       <div class="card" style="text-align:center;">
@@ -886,7 +1020,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
         <p style="font-size:0.8rem; margin-top:6px;">Internal audit scheduled — the work starts immediately</p>
       </div>
     </div>
-    <p style="margin-top:40px; color:var(--text-muted); font-size:0.88rem;">Nicola Lazzari &amp; Ian Hitge &nbsp;·&nbsp; Independent AI Strategy Consultants</p>
+    <p style="margin-top:40px; color:var(--text-muted); font-size:0.88rem;">Ian Hitge &amp; Nicola Lazzari &nbsp;·&nbsp; Independent AI Strategy Consultants</p>
   </div>
 
 </div>
@@ -900,7 +1034,7 @@ p { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; }
       <button class="nav-btn" id="prevBtn" onclick="navigate(-1)" aria-label="Previous slide">&#8592;</button>
       <button class="nav-btn" id="nextBtn" onclick="navigate(1)" aria-label="Next slide">&#8594;</button>
     </div>
-    <div class="nav-info right" id="slideCount">1 / 11</div>
+    <div class="nav-info right" id="slideCount">1 / 12</div>
   </div>
 </div>
 
@@ -914,7 +1048,7 @@ let animating = false;
 
 const slideLabels = [
   'Title', 'The Situation', 'Our Approach', 'AI Stack',
-  'Knowledge Architecture', 'Governance', 'Security Risks',
+  'Knowledge Architecture', 'Execution & publishing', 'Governance', 'Security Risks',
   '30-Day Plan', 'Deliverables', 'Why Us', 'Next Steps'
 ];
 

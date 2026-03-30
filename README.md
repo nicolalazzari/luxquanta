@@ -34,16 +34,12 @@ This repository is configured so commits use:
 
 ## Deploy on Vercel (new GitHub repository)
 
-1. Create an empty repository on GitHub under your **personal** account (e.g. `luxquanta-ai-strategy`).
-2. From this folder:
+1. Repository on GitHub: **[github.com/nicolalazzari/luxquanta](https://github.com/nicolalazzari/luxquanta)** (`https://github.com/nicolalazzari/luxquanta.git`).
+2. From this folder (if you clone elsewhere):
 
    ```bash
    cd luxquanta-ai-strategy-vercel
-   git init
-   git add .
-   git commit -m "Initial static deck for Vercel"
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USER/luxquanta-ai-strategy.git
+   git remote add origin https://github.com/nicolalazzari/luxquanta.git
    git push -u origin main
    ```
 

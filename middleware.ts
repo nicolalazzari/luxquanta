@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { getAuthSecret, getDeckPassword } from './lib/deck-env';
 
 const COOKIE = 'lux_deck_session';
 const HMAC_MESSAGE = 'luxquanta-ai-strategy-v1';
@@ -35,7 +36,7 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   try {
-    const password = process.env.DECK_PASSWORD?.trim();
+    const password = getDeckPassword();
     if (!password) {
       if (request.nextUrl.pathname === '/') {
         return redirectToIndex(request);
@@ -43,7 +44,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
 
-    const authSecret = (process.env.DECK_AUTH_SECRET || password).trim();
+    const authSecret = getAuthSecret(password);
     if (!authSecret) {
       return NextResponse.redirect(new URL('/login.html', request.nextUrl));
     }

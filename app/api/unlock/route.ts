@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
 import { createAuthToken } from '@/lib/auth-token';
+import { getAuthSecret, getDeckPassword } from '@/lib/deck-env';
 
 export const runtime = 'edge';
 
 const COOKIE = 'lux_deck_session';
 
 export async function POST(request: Request) {
-  const password = process.env.DECK_PASSWORD;
+  const password = getDeckPassword();
   if (!password) {
     return NextResponse.json({ ok: false, error: 'Auth not configured' }, { status: 503 });
   }
@@ -22,8 +23,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: false }, { status: 401 });
   }
 
-  const authSecret = process.env.DECK_AUTH_SECRET || password;
-  const token = await createAuthToken(authSecret);
+  const token = await createAuthToken(getAuthSecret(password));
 
   const res = NextResponse.json({ ok: true });
   res.cookies.set(COOKIE, token, {

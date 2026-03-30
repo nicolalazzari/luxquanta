@@ -11,31 +11,37 @@ The decks live in `public/`. A small **Next.js** shell adds **Edge Middleware** 
 
 ## Password wall
 
-1. In the Vercel project: **Settings → Environment Variables** add:
-   - **`DECK_PASSWORD`** — the passphrase people use on `/login.html` (Production + Preview as needed).
-   - Optional **`DECK_AUTH_SECRET`** — long random string used to sign the session cookie (defaults to `DECK_PASSWORD` if omitted).
+In **Vercel → Settings → Environment Variables** (Production / Preview as you prefer):
 
-2. Redeploy after adding variables.
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| **`PASSWORD`** | To enable the wall | Passphrase users enter on `/login.html`. |
+| **`CLIENT_KEY`** | Optional | Secret used to **sign** the session cookie (HMAC). If omitted, `PASSWORD` is used for signing too. |
 
-**If `DECK_PASSWORD` is not set**, the site stays **fully public** (no login) — useful for local dev and optional open deploys.
+**Legacy names** (still work): `DECK_PASSWORD` instead of `PASSWORD`, `DECK_AUTH_SECRET` instead of `CLIENT_KEY`.
 
-The session cookie is **HttpOnly** and holds an **HMAC** derived from `DECK_AUTH_SECRET` (or the password); the plain password is never stored in the cookie.
+Redeploy after changing variables.
+
+**If neither `PASSWORD` nor `DECK_PASSWORD` is set**, the site stays **fully public** (no login).
+
+The session cookie is **HttpOnly** and stores only an **HMAC** derived from `CLIENT_KEY` (or `PASSWORD`); the plain password is not put in the cookie.
 
 ## Local development
 
 ```bash
 npm install
-# optional: echo 'DECK_PASSWORD=test' > .env.local
+# optional:
+# printf 'PASSWORD=test\nCLIENT_KEY=optional-long-secret\n' > .env.local
 npm run dev
 ```
 
-Open `http://localhost:3000` — with `DECK_PASSWORD` set you should be redirected to `/login.html`.
+Open `http://localhost:3000` — with `PASSWORD` set you should be redirected to `/login.html`.
 
 ## Deploy on Vercel
 
 1. Repository: **[github.com/nicolalazzari/luxquanta](https://github.com/nicolalazzari/luxquanta)**.
 2. Import the repo; Vercel should detect **Next.js** (framework preset **Next.js**, build `next build`, output managed by Next).
-3. Add **`DECK_PASSWORD`** in environment variables, then redeploy.
+3. Add **`PASSWORD`** (and optionally **`CLIENT_KEY`**) in environment variables, then redeploy.
 
 ### If you see `500` / `MIDDLEWARE_INVOCATION_FAILED` or `/api/unlock` returns 404
 

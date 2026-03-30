@@ -37,6 +37,10 @@ Open `http://localhost:3000` — with `DECK_PASSWORD` set you should be redirect
 2. Import the repo; Vercel should detect **Next.js** (framework preset **Next.js**, build `next build`, output managed by Next).
 3. Add **`DECK_PASSWORD`** in environment variables, then redeploy.
 
+### If you see `500` / `MIDDLEWARE_INVOCATION_FAILED` or `/api/unlock` returns 404
+
+The project **must** be built as **Next.js**, not as a plain static site. This repo includes `vercel.json` with `"framework": "nextjs"` so Vercel runs `npm run build`. In the Vercel dashboard, open **Settings → General → Framework Preset** and set it to **Next.js** if it still shows **Other**, then **Redeploy**.
+
 ## Use your personal account (not MVF)
 
 Deploy under **`nicolalazzari@gmail.com`** / your **Hobby** team — not the MVF Vercel team. See earlier sections in this file for Git / Vercel login notes.

@@ -4,7 +4,7 @@ The decks live in `public/`. A small **Next.js** shell adds **Edge Middleware** 
 
 | URL | Content |
 |-----|---------|
-| `/` | English deck (rewritten to `/index.html` when allowed) |
+| `/` | Redirects to `/index.html` (avoids Edge rewrite issues on Vercel) |
 | `/index.html` | English deck |
 | `/it.html` | Italian deck |
 | `/login.html` | Password form (always public) |
